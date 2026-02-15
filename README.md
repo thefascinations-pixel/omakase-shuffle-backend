@@ -58,7 +58,7 @@ Set:
 ### 3) Run local Vercel server
 
 ```bash
-npm run dev
+npm run dev:vercel
 ```
 
 By default, endpoints are available at `http://localhost:3000`.

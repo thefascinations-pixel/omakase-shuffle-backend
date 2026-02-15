@@ -4,7 +4,7 @@
   "private": true,
   "description": "Omakase Shuffle backend and iOS source",
   "scripts": {
-    "dev": "vercel dev",
+    "dev:vercel": "vercel dev",
     "typecheck": "tsc --noEmit"
   },
   "engines": {
