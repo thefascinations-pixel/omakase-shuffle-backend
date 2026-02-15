@@ -157,51 +157,21 @@ export async function fetchArtistById(
 
 export async function searchTracksByArtistName(
   artistName: string,
-  offset: number,
-  limit = 50
+  offset: number
 ): Promise<{ items: SpotifyTrack[]; total: number }> {
-  const normalizedLimit = Number.isFinite(limit)
-    ? Math.max(1, Math.min(50, Math.trunc(limit)))
-    : 20;
   const normalizedOffset = Number.isFinite(offset)
     ? Math.max(0, Math.trunc(offset))
     : 0;
 
-  try {
-    const response = await spotifyGet<SpotifySearchTrackResponse>("/v1/search", {
-      type: "track",
-      q: `artist:"${artistName}"`,
-      limit: normalizedLimit,
-      offset: normalizedOffset,
-      market: "JP"
-    });
+  const response = await spotifyGet<SpotifySearchTrackResponse>("/v1/search", {
+    type: "track",
+    q: `artist:"${artistName}"`,
+    offset: normalizedOffset,
+    market: "JP"
+  });
 
-    return {
-      items: response.tracks.items,
-      total: response.tracks.total
-    };
-  } catch (error) {
-    const message = error instanceof Error ? error.message : "";
-    if (
-      message.includes("Invalid limit") &&
-      normalizedLimit !== 20
-    ) {
-      const fallback = await spotifyGet<SpotifySearchTrackResponse>(
-        "/v1/search",
-        {
-          type: "track",
-          q: `artist:"${artistName}"`,
-          limit: 20,
-          offset: normalizedOffset,
-          market: "JP"
-        }
-      );
-
-      return {
-        items: fallback.tracks.items,
-        total: fallback.tracks.total
-      };
-    }
-    throw error;
-  }
+  return {
+    items: response.tracks.items,
+    total: response.tracks.total
+  };
 }

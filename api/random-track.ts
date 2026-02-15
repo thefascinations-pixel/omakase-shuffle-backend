@@ -8,7 +8,7 @@ import {
 } from "./_lib/spotify";
 
 const MAX_UNIQUE_TRACKS = 200;
-const PAGE_SIZE = 50;
+const PAGE_SIZE = 20;
 const MAX_OFFSET = 1000;
 
 function pickRandomTrack(tracks: SpotifyTrack[]): SpotifyTrack {
@@ -68,8 +68,7 @@ export default async function handler(
     ) {
       const page = await searchTracksByArtistName(
         resolvedArtistName,
-        offset,
-        PAGE_SIZE
+        offset
       );
       knownTotal = page.total;
 
