@@ -1,0 +1,196 @@
+# Omakase Shuffle (MVP)
+
+Omakase Shuffle is an iOS SwiftUI app plus a Vercel TypeScript backend.
+
+- User enters artist name (Japanese or English)
+- App resolves top Spotify artist in `JP` market
+- App stores artist data in `UserDefaults`
+- Main screen picks a random song and opens it in Spotify
+
+No lyrics, playback, or artwork are included.
+
+## Repository Layout
+
+```text
+.
+├── api
+│   ├── resolve-artist.ts
+│   ├── random-track.ts
+│   └── _lib
+│       ├── spotify.ts
+│       └── http.ts
+├── ios/OmakaseShuffle
+│   ├── OmakaseShuffleApp.swift
+│   ├── Config/AppConfig.swift
+│   ├── Models
+│   ├── Services
+│   ├── ViewModels
+│   └── Views
+├── vercel.json
+├── package.json
+└── tsconfig.json
+```
+
+## Backend: Local Run
+
+### 1) Install dependencies
+
+```bash
+npm install
+```
+
+### 2) Set environment variables
+
+Create `.env` from `.env.example`:
+
+```bash
+cp .env.example .env
+```
+
+Set:
+
+- `SPOTIFY_CLIENT_ID`
+- `SPOTIFY_CLIENT_SECRET`
+
+### 3) Run local Vercel server
+
+```bash
+npm run dev
+```
+
+By default, endpoints are available at `http://localhost:3000`.
+
+## Backend Endpoints
+
+### `POST /api/resolve-artist`
+
+Request JSON:
+
+```json
+{ "artistQuery": "緑黄色社会" }
+```
+
+Success response JSON:
+
+```json
+{
+  "artistId": "spotify_artist_id",
+  "artistDisplayName": "緑黄色社会"
+}
+```
+
+Behavior:
+
+- Trims whitespace
+- Searches Spotify with `type=artist`, `limit=1`, `market=JP`
+- Returns top result only
+- Returns `404` clean error if no artist found
+
+### `GET /api/random-track?artistQuery=...&artistId=...`
+
+Success response JSON:
+
+```json
+{
+  "trackName": "Song Title",
+  "albumName": "Album Name",
+  "spotifyUrl": "https://open.spotify.com/track/..."
+}
+```
+
+Behavior:
+
+- Works when only `artistQuery` is provided
+- Resolves top artist display name in `JP` market
+- Searches tracks with `q=artist:\"<resolved artist name>\"`
+- Paginates with `limit=50` and increasing offsets
+- Collects up to 200 unique tracks (dedupe by track ID)
+- Returns random track from pool
+- Returns `404` clean error if no tracks found
+
+## cURL Tests
+
+Use local server:
+
+```bash
+curl -X POST "http://localhost:3000/api/resolve-artist" \
+  -H "Content-Type: application/json" \
+  -d '{"artistQuery":"TOMOO"}'
+```
+
+```bash
+curl "http://localhost:3000/api/random-track?artistQuery=TOMOO"
+```
+
+```bash
+curl "http://localhost:3000/api/random-track?artistQuery=%E7%B7%91%E9%BB%84%E8%89%B2%E7%A4%BE%E4%BC%9A"
+```
+
+## Deploy to Vercel
+
+### 1) Push repository to GitHub
+
+### 2) Import project in Vercel
+
+- Select the repository
+- Framework preset: `Other`
+- Build command: none required
+- Output directory: none required
+
+### 3) Set environment variables in Vercel Project Settings
+
+- `SPOTIFY_CLIENT_ID`
+- `SPOTIFY_CLIENT_SECRET`
+
+### 4) Deploy
+
+After deploy, your base URL is:
+
+```text
+https://<your-project>.vercel.app
+```
+
+## iOS App (SwiftUI, iOS 17+)
+
+The SwiftUI source is in `ios/OmakaseShuffle`.
+
+### Configure backend URL
+
+Edit:
+
+- `ios/OmakaseShuffle/Config/AppConfig.swift`
+
+Set:
+
+```swift
+static let backendBaseURL = "https://<your-project>.vercel.app"
+```
+
+### App behavior
+
+- Artist input screen:
+  - Placeholder: `e.g. TOMOO / 緑黄色社会`
+  - Autosave triggers:
+    - Return/Done
+    - TextField loses focus
+    - 800ms debounce after typing stops
+  - On save:
+    - Calls `POST /api/resolve-artist`
+    - Stores `artistQuery`, `spotifyArtistId`, `artistDisplayName`
+    - Navigates to main screen
+  - On not found/network error:
+    - Shows friendly error message
+    - Stays on input screen
+- Main screen:
+  - Shows resolved artist display name (or query fallback)
+  - Big circular `pick random song` button
+  - Calls `GET /api/random-track`
+  - Loading text: `finding a song…`
+  - Shows `trackName`, `albumName`
+  - `Open in Spotify` opens the web URL using `openURL`
+  - `Change artist` clears stored values and returns to input screen
+
+## Security Notes
+
+- Spotify client credentials are backend-only.
+- No Spotify secrets are stored in iOS code.
