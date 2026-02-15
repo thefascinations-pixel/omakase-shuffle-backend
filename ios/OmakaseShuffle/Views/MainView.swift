@@ -14,14 +14,14 @@ struct MainView: View {
     }
 
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
+        ZStack {
             GradientBackground()
 
             VStack(spacing: 26) {
                 Spacer(minLength: 20)
 
                 Text(displayArtistName)
-                    .font(.system(size: 56, weight: .light, design: .rounded))
+                    .font(.system(size: 48, weight: .light, design: .rounded))
                     .minimumScaleFactor(0.5)
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
@@ -34,7 +34,7 @@ struct MainView: View {
                     }
                 } label: {
                     Text("pick\nrandom\nsong")
-                        .font(.system(size: 48, weight: .light, design: .rounded))
+                        .font(.system(size: 42, weight: .light, design: .rounded))
                         .multilineTextAlignment(.center)
                         .foregroundStyle(.white.opacity(0.95))
                         .frame(width: 310, height: 310)
@@ -52,20 +52,16 @@ struct MainView: View {
 
                 if viewModel.isFindingTrack {
                     Text("finding a song…")
-                        .font(.system(size: 34, weight: .light, design: .rounded))
-                        .foregroundStyle(.white.opacity(0.94))
-                } else {
-                    Text("tap to find a song")
-                        .font(.system(size: 34, weight: .light, design: .rounded))
+                        .font(.system(size: 30, weight: .light, design: .rounded))
                         .foregroundStyle(.white.opacity(0.94))
                 }
 
                 if let trackResult = viewModel.trackResult {
                     VStack(spacing: 8) {
                         Text(trackResult.trackName)
-                            .font(.system(size: 24, weight: .semibold, design: .rounded))
+                            .font(.system(size: 21, weight: .semibold, design: .rounded))
                         Text(trackResult.albumName)
-                            .font(.system(size: 18, weight: .light, design: .rounded))
+                            .font(.system(size: 16, weight: .light, design: .rounded))
                             .opacity(0.9)
                         Button("Open in Spotify") {
                             if let spotifyURL = URL(string: trackResult.spotifyUrl) {
@@ -99,7 +95,8 @@ struct MainView: View {
             }
             .padding(.top, 42)
             .padding(.bottom, 16)
-
+        }
+        .overlay(alignment: .bottomTrailing) {
             Button {
                 viewModel.clearArtistSelection()
             } label: {

@@ -1,5 +1,5 @@
 import Foundation
 
 enum AppConfig {
-    static let backendBaseURL = "https://YOUR-VERCEL-PROJECT.vercel.app"
+    static let backendBaseURL = "https://omakase-shuffle-backend.vercel.app/"
 }

@@ -1,0 +1,42 @@
+name: OmakaseShuffle
+options:
+  createIntermediateGroups: true
+configs:
+  Debug: debug
+  Release: release
+targets:
+  OmakaseShuffle:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: .
+        excludes:
+          - project.yml
+          - OmakaseShuffle.xcodeproj
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.omakaseshuffle.app
+        PRODUCT_NAME: OmakaseShuffle
+        SWIFT_VERSION: 5.0
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: 1.0
+        GENERATE_INFOPLIST_FILE: true
+        INFOPLIST_KEY_CFBundleDisplayName: Omakase Shuffle
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: true
+        INFOPLIST_KEY_UILaunchScreen_Generation: true
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""
+schemes:
+  OmakaseShuffle:
+    build:
+      targets:
+        OmakaseShuffle: all
+    run:
+      config: Debug
+    archive:
+      config: Release
+    profile:
+      config: Release
+    analyze:
+      config: Debug
