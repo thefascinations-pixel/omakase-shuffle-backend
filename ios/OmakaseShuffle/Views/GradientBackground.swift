@@ -4,9 +4,9 @@ struct GradientBackground: View {
     var body: some View {
         LinearGradient(
             colors: [
-                Color(red: 0.72, green: 0.92, blue: 0.88),
-                Color(red: 0.50, green: 0.80, blue: 0.90),
-                Color(red: 0.37, green: 0.67, blue: 0.87)
+                Color(red: 0.91, green: 0.53, blue: 0.62),
+                Color(red: 0.91, green: 0.62, blue: 0.46),
+                Color(red: 0.75, green: 0.40, blue: 0.24)
             ],
             startPoint: .bottomLeading,
             endPoint: .topTrailing
@@ -22,3 +22,4 @@ struct GradientBackground: View {
         .ignoresSafeArea()
     }
 }
+

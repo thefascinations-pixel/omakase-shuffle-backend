@@ -1,6 +1,6 @@
 # Omakase Shuffle (MVP)
 
-Omakase Shuffle is an iOS SwiftUI app plus a Vercel TypeScript backend.
+Omakase Shuffle is an iOS SwiftUI app, a web app, and a Vercel TypeScript backend.
 
 - User enters artist name (Japanese or English)
 - App resolves top Spotify artist in `JP` market
@@ -26,7 +26,10 @@ No lyrics, playback, or artwork are included.
 │   ├── Services
 │   ├── ViewModels
 │   └── Views
-├── vercel.json
+├── public
+│   ├── index.html
+│   ├── app.css
+│   └── app.js
 ├── package.json
 └── tsconfig.json
 ```
@@ -149,6 +152,38 @@ After deploy, your base URL is:
 ```text
 https://<your-project>.vercel.app
 ```
+
+The web app is served from:
+
+```text
+https://<your-project>.vercel.app/
+```
+
+It calls the same `/api/resolve-artist` and `/api/random-track` endpoints.
+
+## Web App Behavior
+
+- Artist input screen:
+  - Placeholder: `e.g. TOMOO / 緑黄色社会`
+  - Autosave triggers:
+    - Enter
+    - Input loses focus
+    - 800ms debounce after typing stops
+  - On save:
+    - Calls `POST /api/resolve-artist`
+    - Stores `artistQuery`, `spotifyArtistId`, `artistDisplayName` in `localStorage`
+    - Navigates to main screen
+  - On not found/network error:
+    - Shows friendly error message
+    - Stays on input screen
+- Main screen:
+  - Shows resolved artist display name (or query fallback)
+  - Big circular `pick random song` button
+  - Calls `GET /api/random-track`
+  - Loading text: `finding a song...`
+  - Shows `trackName`, `albumName`
+  - `Open in Spotify` opens the web URL in a new tab
+  - `Change artist` clears stored values and returns to input screen
 
 ## iOS App (SwiftUI, iOS 17+)
 

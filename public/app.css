@@ -1,0 +1,213 @@
+:root {
+  --bg-a: #e8879e;
+  --bg-b: #e6a069;
+  --bg-c: #ba673c;
+  --text: rgba(255, 255, 255, 0.95);
+  --text-muted: rgba(255, 255, 255, 0.88);
+  --surface: rgba(255, 255, 255, 0.16);
+  --surface-strong: rgba(255, 255, 255, 0.2);
+  --stroke: rgba(255, 255, 255, 0.35);
+  --shadow: rgba(17, 6, 4, 0.2);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: "Fraunces", "Times New Roman", serif;
+}
+
+body {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.2), transparent 53%),
+    linear-gradient(126deg, var(--bg-a) 0%, var(--bg-b) 58%, var(--bg-c) 100%);
+  color: var(--text);
+}
+
+.app {
+  min-height: 100vh;
+  padding: 1.5rem;
+}
+
+.screen {
+  min-height: calc(100vh - 3rem);
+}
+
+.stack {
+  margin: 0 auto;
+  max-width: 680px;
+  min-height: calc(100vh - 3rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.2rem;
+  text-align: center;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 300;
+}
+
+.text-input {
+  width: min(100%, 560px);
+  margin: 0 auto;
+  border: 1px solid var(--stroke);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 300;
+  padding: 0.9rem 1rem;
+  outline: none;
+  transition: box-shadow 150ms ease, transform 150ms ease;
+}
+
+.text-input::placeholder {
+  color: rgba(255, 255, 255, 0.73);
+}
+
+.text-input:focus {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
+}
+
+.main-stack {
+  min-height: calc(100vh - 3rem);
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 1rem;
+  padding-block: 1rem 5rem;
+}
+
+.artist-name {
+  max-width: min(90vw, 720px);
+  font-size: clamp(2rem, 7vw, 3rem);
+  font-weight: 300;
+  line-height: 1.08;
+  margin-inline: auto;
+}
+
+.pick-button {
+  margin-inline: auto;
+  width: clamp(220px, 46vw, 310px);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  background: var(--surface-strong);
+  color: var(--text);
+  font-family: inherit;
+  font-size: clamp(2rem, 6.4vw, 2.65rem);
+  font-weight: 300;
+  line-height: 1.04;
+  cursor: pointer;
+  box-shadow: 0 8px 16px var(--shadow);
+  transition: transform 150ms ease, filter 150ms ease;
+}
+
+.pick-button:hover {
+  filter: brightness(1.05);
+}
+
+.pick-button:active {
+  transform: scale(0.985);
+}
+
+.pick-button:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.track-result {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.track-name {
+  font-size: clamp(1.15rem, 2.8vw, 1.5rem);
+  font-weight: 600;
+}
+
+.album-name {
+  font-size: clamp(1rem, 2.3vw, 1.1rem);
+  font-weight: 300;
+  color: var(--text-muted);
+}
+
+.spotify-link {
+  margin: 0.45rem auto 0;
+  display: inline-flex;
+  border-radius: 999px;
+  border: 1px solid var(--stroke);
+  padding: 0.6rem 1rem;
+  color: var(--text);
+  background: var(--surface-strong);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.change-artist {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  border-radius: 999px;
+  border: none;
+  padding: 0.62rem 0.95rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+  font: inherit;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.status {
+  color: var(--text);
+  font-size: clamp(1rem, 3vw, 1.8rem);
+  font-weight: 300;
+}
+
+.error {
+  max-width: 760px;
+  margin-inline: auto;
+  color: var(--text);
+  opacity: 0.95;
+  font-size: 0.98rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  .app {
+    padding: 1rem;
+  }
+
+  .screen,
+  .stack,
+  .main-stack {
+    min-height: calc(100vh - 2rem);
+  }
+}

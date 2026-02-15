@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Omakase Shuffle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/app.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section id="artist-screen" class="screen">
+        <div class="stack">
+          <h1>Enter the artist</h1>
+          <label class="sr-only" for="artist-input">Artist input</label>
+          <input
+            id="artist-input"
+            class="text-input"
+            type="text"
+            placeholder="e.g. TOMOO / 緑黄色社会"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <p id="artist-status" class="status" hidden>saving artist...</p>
+          <p id="artist-error" class="error" hidden></p>
+        </div>
+      </section>
+
+      <section id="main-screen" class="screen" hidden>
+        <div class="main-stack">
+          <h2 id="display-artist" class="artist-name"></h2>
+
+          <button id="pick-button" class="pick-button" type="button">
+            pick
+            <br />
+            random
+            <br />
+            song
+          </button>
+
+          <p id="track-status" class="status" hidden>finding a song...</p>
+
+          <div id="track-result" class="track-result" hidden>
+            <p id="track-name" class="track-name"></p>
+            <p id="album-name" class="album-name"></p>
+            <a
+              id="spotify-link"
+              class="spotify-link"
+              href="#"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Open in Spotify
+            </a>
+          </div>
+
+          <p id="track-error" class="error" hidden></p>
+        </div>
+
+        <button id="change-artist-button" class="change-artist" type="button">
+          Change artist
+        </button>
+      </section>
+    </main>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>
