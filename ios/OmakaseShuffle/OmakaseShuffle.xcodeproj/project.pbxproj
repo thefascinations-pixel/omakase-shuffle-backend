@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -36,7 +36,7 @@
 		9ACCD921AB627C6B33D20277 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		BD9ED240E74A94FBAC18A336 /* OmakaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmakaseViewModel.swift; sourceTree = "<group>"; };
 		EEF449BF6F22519866D937D9 /* ArtistResolutionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistResolutionResponse.swift; sourceTree = "<group>"; };
-		EF4ECB14E99C52C06EA144BA /* OmakaseShuffle.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OmakaseShuffle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF4ECB14E99C52C06EA144BA /* OmakaseShuffle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmakaseShuffle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		"TEMP_04BC123A-F60F-468B-9AC4-2E664FA6C73B" /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		"TEMP_8A7A1030-EE2B-443E-9AFB-540B8051ED00" /* OmakaseShuffleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmakaseShuffleApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,7 +84,17 @@
 				39C742A6BD193B7C12D4594E /* ViewModels */,
 				CB706C99069BEC7F54EB7E08 /* Views */,
 				0430BCA11CEC7905282522C0 /* Products */,
+				9500056F2F42170C00D910FE /* Recovered References */,
 			);
+			sourceTree = "<group>";
+		};
+		9500056F2F42170C00D910FE /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				"TEMP_8A7A1030-EE2B-443E-9AFB-540B8051ED00" /* OmakaseShuffleApp.swift */,
+				"TEMP_04BC123A-F60F-468B-9AC4-2E664FA6C73B" /* Assets.xcassets */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		CB706C99069BEC7F54EB7E08 /* Views */ = {
@@ -107,20 +117,6 @@
 				484512DBD84698FEAB76F2AB /* SavedArtist.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		"TEMP_DAA9E351-E3E8-46B5-AD40-FB58170B5FBD" /* OmakaseShuffle */ = {
-			isa = PBXGroup;
-			children = (
-				"TEMP_04BC123A-F60F-468B-9AC4-2E664FA6C73B" /* Assets.xcassets */,
-				"TEMP_8A7A1030-EE2B-443E-9AFB-540B8051ED00" /* OmakaseShuffleApp.swift */,
-				39C742A6BD193B7C12D4594E /* ViewModels */,
-				7587DE9E3B1AD76A1FDC610D /* Config */,
-				D42F6C23D59FFAEFF2444A51 /* Models */,
-				CB706C99069BEC7F54EB7E08 /* Views */,
-				4ECADBC3DB7CC37A96920EDE /* Services */,
-			);
-			path = OmakaseShuffle;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,7 +150,6 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					7E976D340C4769CFA8949B42 = {
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -169,7 +164,6 @@
 			);
 			mainGroup = 8A23547DFB3D3B93A743EAE9;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -220,7 +214,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZP7GWKA2AH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Omakase Shuffle";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -363,7 +357,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZP7GWKA2AH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Omakase Shuffle";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
