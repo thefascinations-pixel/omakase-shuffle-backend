@@ -122,7 +122,7 @@ async function spotifyGet<T>(
   if (!response.ok) {
     const bodyText = await response.text();
     throw new Error(
-      `Spotify API request failed (${response.status}) at ${path}: ${bodyText}`
+      `Spotify API request failed (${response.status}) at ${path} (${url.toString()}): ${bodyText}`
     );
   }
 
@@ -135,7 +135,6 @@ export async function searchTopArtist(
   const response = await spotifyGet<SpotifySearchArtistResponse>("/v1/search", {
     type: "artist",
     q: artistQuery,
-    limit: 1,
     market: "JP"
   });
 
